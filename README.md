@@ -2,6 +2,8 @@
 
 A simple smart contract to allow registration of the blocks whose hashes will be used as seeds for the snapshot.
 
+The registered blocknumbers are to be provided as input to the [snapshot blocknumber calculation](https://github.com/energywebfoundation/snapshot-block-calculator). 
+
 ## Hardhat documentation
 
 This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
