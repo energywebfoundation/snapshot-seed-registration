@@ -1,19 +1,19 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
+describe("SnapshotSeedRegistration", function () {
+  it("Should allow registration of snapshot block", async function () {
+    const SnapshotSeedRegistration = await ethers.getContractFactory(
+      "SnapshotSeedRegistration"
+    );
+    const registration = await SnapshotSeedRegistration.deploy();
+    await registration.deployed();
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
-
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
+    const setGreetingTx = await registration.registerSnapshotSeed(1, 18000000);
 
     // wait until the transaction is mined
     await setGreetingTx.wait();
 
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
+    expect(await registration.getSnapshotSeed(1)).to.equal(18000000);
   });
 });
