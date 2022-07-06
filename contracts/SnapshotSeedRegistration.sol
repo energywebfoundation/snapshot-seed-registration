@@ -9,6 +9,7 @@ contract SnapshotSeedRegistration is Ownable {
   
   /*
    * This allows the owner to register which block they will be using for a snapshot seed
+   * Registration can be updated but this will be tracked by transaction and event history
    * TODO: emit event
    */
   function registerSnapshotSeed(uint snapshotNumber, uint seedBlockNumber) public onlyOwner {
