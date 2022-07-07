@@ -4,6 +4,13 @@ A simple smart contract to allow registration of the blocks whose hashes will be
 
 The registered blocknumbers are to be provided as input to the [snapshot blocknumber calculation](https://github.com/energywebfoundation/snapshot-block-calculator). 
 
+## Deployment
+
+Contract flattened for verification using POANetwork flattener: https://github.com/poanetwork/solidity-flattener
+```
+./node_modules/.bin/poa-solidity-flattener ./contracts/SnapshotSeedRegistration.sol
+```
+
 ## Hardhat documentation
 
 This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
