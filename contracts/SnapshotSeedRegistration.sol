@@ -11,7 +11,6 @@ contract SnapshotSeedRegistration is Ownable {
   
   /*
    * This allows the owner to register which block they will be using for a snapshot seed
-   * TODO: emit event
    */
   function registerSnapshotSeed(uint snapshotNumber, uint seedBlockNumber) public onlyOwner {
     require( snapshotSeedBlocks[snapshotNumber] == 0, "already registered snapshot");
@@ -23,7 +22,6 @@ contract SnapshotSeedRegistration is Ownable {
    * This allows the owner to update an existing registration
    * It is separate from register to make sure that users are intentional about wanting to perform an update
    * The updated is tracked by transaction and event history
-   * TODO: emit event
    */
   function updateSnapshotSeed(uint snapshotNumber, uint seedBlockNumber) public onlyOwner {
     require( snapshotSeedBlocks[snapshotNumber] != 0, "no existing seed for this snapshot number");
