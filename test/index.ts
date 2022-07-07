@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 
 describe("SnapshotSeedRegistration", function () {
-  it("Should allow registration and update of snapshot block", async function () {
+  it("Should allow registration and update of snapshot seed block", async function () {
     const SnapshotSeedRegistration = await ethers.getContractFactory(
       "SnapshotSeedRegistration"
     );
@@ -29,6 +29,48 @@ describe("SnapshotSeedRegistration", function () {
     expect(await registration.getSnapshotSeed(snapshotNumber)).to.equal(
       snapshotSeedBlock2
     );
+  });
+
+  it("Should emit event upon registration", async function () {
+    const SnapshotSeedRegistration = await ethers.getContractFactory(
+      "SnapshotSeedRegistration"
+    );
+    const registration = await SnapshotSeedRegistration.deploy();
+    await registration.deployed();
+
+    const snapshotNumber = 1;
+    const snapshotSeedBlock1 = 10000000;
+    await expect(
+      registration.registerSnapshotSeed(snapshotNumber, snapshotSeedBlock1)
+    )
+      .to.emit(registration, "SeedBlockRegistered")
+      .withArgs(snapshotNumber, snapshotSeedBlock1);
+  });
+
+  it("Should emit event upon update", async function () {
+    const SnapshotSeedRegistration = await ethers.getContractFactory(
+      "SnapshotSeedRegistration"
+    );
+    const registration = await SnapshotSeedRegistration.deploy();
+    await registration.deployed();
+
+    const snapshotNumber = 1;
+    const snapshotSeedBlock1 = 10000000;
+    const registration1Tx = await registration.registerSnapshotSeed(
+      snapshotNumber,
+      snapshotSeedBlock1
+    );
+    await registration1Tx.wait();
+    expect(await registration.getSnapshotSeed(snapshotNumber)).to.equal(
+      snapshotSeedBlock1
+    );
+
+    const snapshotSeedBlock2 = 20000000;
+    await expect(
+      registration.updateSnapshotSeed(snapshotNumber, snapshotSeedBlock2)
+    )
+      .to.emit(registration, "SeedBlockUpdated")
+      .withArgs(snapshotNumber, snapshotSeedBlock2);
   });
 
   it("Should only allow owner to register", async function () {

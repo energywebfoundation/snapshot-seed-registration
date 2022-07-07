@@ -6,6 +6,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract SnapshotSeedRegistration is Ownable {
   mapping(uint => uint) private snapshotSeedBlocks; 
+  event SeedBlockRegistered(uint, uint);
+  event SeedBlockUpdated(uint, uint);
   
   /*
    * This allows the owner to register which block they will be using for a snapshot seed
@@ -14,6 +16,7 @@ contract SnapshotSeedRegistration is Ownable {
   function registerSnapshotSeed(uint snapshotNumber, uint seedBlockNumber) public onlyOwner {
     require( snapshotSeedBlocks[snapshotNumber] == 0, "already registered snapshot");
     snapshotSeedBlocks[snapshotNumber] = seedBlockNumber;
+    emit SeedBlockRegistered(snapshotNumber, seedBlockNumber);
   }
   
   /*
@@ -26,6 +29,7 @@ contract SnapshotSeedRegistration is Ownable {
     require( snapshotSeedBlocks[snapshotNumber] != 0, "no existing seed for this snapshot number");
     require( snapshotSeedBlocks[snapshotNumber] != seedBlockNumber, "this seedBlockNumber already set for this snapshot number");
     snapshotSeedBlocks[snapshotNumber] = seedBlockNumber;
+    emit SeedBlockUpdated(snapshotNumber, seedBlockNumber);
   }
 
   /*
