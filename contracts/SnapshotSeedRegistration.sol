@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract SnapshotSeedRegistration is Ownable {
   mapping(uint => uint) private snapshotSeedBlocks; 
-  event SeedBlockRegistered(uint, uint);
-  event SeedBlockUpdated(uint, uint);
+  event SeedBlockRegistered(uint indexed snapshotNumber, uint indexed seedBlockNumber);
+  event SeedBlockUpdated(uint indexed snapshotNumber, uint indexed seedBlockNumber);
   
   /*
    * This allows the owner to register which block they will be using for a snapshot seed
