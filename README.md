@@ -4,7 +4,14 @@ A simple smart contract to allow registration of the blocks whose hashes will be
 
 The registered blocknumbers are to be provided as input to the [snapshot blocknumber calculation](https://github.com/energywebfoundation/snapshot-block-calculator). 
 
+Contract for Consortia Staking Snapshots is deployed on EWC at [0x4A0F475c59c9453B29c66548DB86f6557a75F448](https://explorer.energyweb.org/address/0x4A0F475c59c9453B29c66548DB86f6557a75F448/transactions)
+
 ## Deployment
+
+Contract deployment using script
+```
+npx hardhat run --network ewc scripts/deploy.ts
+```
 
 Contract flattened for verification using POANetwork flattener: https://github.com/poanetwork/solidity-flattener
 ```
